@@ -13,10 +13,9 @@ public class BusTracker {
 	}
 	    public String demo() {
 	        // Current official CTA time.
-	    	String sampleRoute = "&rt=53A&stpid=4716"; // Pulaski & 55th north bound 53A bus
+	    	String sampleRoute = "&rt=53A&stpid=4716";
 	        String url = baseUrl + "getpredictions?key=" + key + sampleRoute;
 	        return makeRequest(url);
-	        
 	    }
 	    private String makeRequest(String stringUrl) {
 	        String response = null;
@@ -34,6 +33,10 @@ public class BusTracker {
 	        return report(stringUrl, response);
 	    }
 	    private String report(String url, String xml) {
+	    	int getIndexRoute = xml.indexOf("</rt>");
+	    	String getRoute = xml.substring(getIndexRoute -3, getIndexRoute);
+	    	int getIndexDir = xml.indexOf("</rtdir>");
+	    	String getDir = xml.substring(getIndexDir-10, getIndexDir);
 	    	int firstIndex = xml.indexOf("</prdtm>");
 	    	String fTimeH = xml.substring(firstIndex - 5, firstIndex -3);
 	    	String fTimeM = xml.substring(firstIndex -2, firstIndex);
@@ -43,7 +46,7 @@ public class BusTracker {
 	    	if (firstBH == 0)
 	    		firstBH = 12;
 	    	//String msg = url + "\n" + xml;
-	    	return ("The next bus arrives at " + firstBH + ":" + fTimeM);
+	    	return ("The next " + getDir + " " + getRoute + " bus arrives at " + firstBH + ":" + fTimeM);
 	        
 	    }
 }
