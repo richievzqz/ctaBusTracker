@@ -13,9 +13,10 @@ public class BusTracker {
 	}
 	    public String demo() {
 	        // Current official CTA time.
-	    	String sampleRoute = "&rt=53A&stpid=4716";
+	    	String sampleRoute = "&rt=53A&stpid=4716"; // Pulaski & 55th north bound 53A bus
 	        String url = baseUrl + "getpredictions?key=" + key + sampleRoute;
 	        return makeRequest(url);
+	        
 	    }
 	    private String makeRequest(String stringUrl) {
 	        String response = null;
